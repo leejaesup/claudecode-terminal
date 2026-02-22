@@ -1,0 +1,66 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "claudecode-terminal"
+version = "0.1.0"
+description = "Control Claude Code remotely via Telegram"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [{ name = "js" }]
+keywords = ["claude", "telegram", "remote", "cli", "ai"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development",
+]
+
+dependencies = [
+    "python-telegram-bot>=21.0,<22.0",
+    "aiosqlite>=0.20.0",
+    "typer>=0.12.0",
+    "tomli-w>=1.0.0",
+    "tomli>=2.0.0; python_version < '3.11'",
+    "rich>=13.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.5.0",
+    "mypy>=1.10",
+]
+
+[project.scripts]
+claudecode-terminal = "claudecode_terminal.cli:app"
+cct = "claudecode_terminal.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/user/claudecode-terminal"
+Repository = "https://github.com/user/claudecode-terminal"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/claudecode_terminal"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
